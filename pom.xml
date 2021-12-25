@@ -49,7 +49,7 @@
 
 		<!--
 			Springdoc open API - for documentation
-			Swagger UI - http://localhost:8080/swagger-ui/index.htm
+			Swagger UI - http://localhost:8080/swagger-ui/index.html
 		-->
 		<dependency>
 			<groupId>org.springdoc</groupId>

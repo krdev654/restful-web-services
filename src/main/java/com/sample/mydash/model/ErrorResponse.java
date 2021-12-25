@@ -1,4 +1,4 @@
-package com.sample.mydash.bean;
+package com.sample.mydash.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

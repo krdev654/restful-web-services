@@ -1,6 +1,6 @@
 package com.sample.mydash.contoller;
 
-import com.sample.mydash.bean.ErrorResponse;
+import com.sample.mydash.model.ErrorResponse;
 import com.sample.mydash.exception.UserNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
