@@ -4,10 +4,13 @@ import com.sample.mydash.bean.User;
 import com.sample.mydash.exception.UserNotFoundException;
 import com.sample.mydash.service.UserDAOService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
@@ -24,12 +27,15 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public User getUser(@PathVariable int id) {
+    public EntityModel<User> getUser(@PathVariable int id) {
         User user = userDAOService.findUser(id);
         if (user == null) {
             throw new UserNotFoundException("UserId: " + id + " was not found.");
         }
-        return user;
+        EntityModel<User> model = EntityModel.of(user);
+        WebMvcLinkBuilder linkToUsers = linkTo(methodOn(this.getClass()).getAllUser());
+        model.add(linkToUsers.withRel("all-users"));
+        return model;
     }
 
     @PostMapping(value = "/users/add")
